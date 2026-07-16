@@ -1,30 +1,147 @@
-html, body {
-    background-color: lightblue;
-    font-family: Arial, sans-serif;
+/* ====== Global Reset ====== */
+* {
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-    nav {
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+    font-family: "Segoe UI", Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
-        li {
-            display: inline;
-            margin-right: 15px;
-        }
+/* ====== Navigation ====== */
+nav {
+    background-color: #004080; /* professional deep blue */
+    padding: 1em;
+}
 
-        a {
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5em;
+}
 
-            &:hover {
-                color: #0066cc;
-            }
-        }
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover,
+nav ul li a:focus {
+    color: #ffcc00; /* accessible highlight */
+}
+
+/* ====== Main Content ====== */
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 2em auto;
+    padding: 0 1em;
+}
+
+main h1 {
+    font-size: 2.2rem;
+    margin-bottom: 0.75em;
+    color: #004080;
+    text-align: center;
+}
+
+main h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1em;
+    color: #0066cc;
+    text-align: center;
+}
+
+main p {
+    margin-bottom: 1.5em;
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+/* ====== Images ====== */
+.main-logo {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin: 1em auto;
+    display: block;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* ====== Lists ====== */
+main ul {
+    list-style: none;
+    padding: 0;
+    margin: 1.5em 0;
+}
+
+main ul li {
+    margin-bottom: 1em;
+    font-size: 1.05rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+}
+
+/* Organizations logos */
+main ul li img {
+    max-width: 50px;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Projects & Categories lists (no logos) */
+main ul li strong {
+    color: #004080;
+}
+
+/* ====== Footer ====== */
+footer {
+    background-color: #004080;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    font-size: 0.9rem;
+}
+
+/* ====== Responsive Design ====== */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        align-items: center;
     }
-}                
+
+    main h1 {
+        font-size: 1.8rem;
+    }
+
+    main h2 {
+        font-size: 1.3rem;
+    }
+
+    .main-logo {
+        max-width: 80%;
+    }
+
+    main ul li {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    main ul li img {
+        margin-bottom: 0.5em;
+    }
+}
