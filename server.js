@@ -3,6 +3,9 @@ import path from 'path';
 import express from 'express';
 import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
+import { getAllProjects } from './src/models/projects.js';
+import { getAllCategories } from './src/models/categories.js';
+
 
 // Define the application environment
 const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'production';
@@ -33,20 +36,36 @@ app.get('/', async (req, res) => {
     res.render('home', { title });
 });
 app.get('/organizations', async (req, res) => {
+  try {
     const organizations = await getAllOrganizations();
     const title = 'Our Partner Organizations';
-
     res.render('organizations', { title, organizations });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error retrieving organizations');
+  }
 });
-
 app.get('/projects', async (req, res) => {
-    const title = 'Service Projects';
-    res.render('projects', { title });
+  try {
+    const projects = await getAllProjects();
+    const title = 'Our Service Projects';
+    res.render('projects', { title, projects });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error retrieving projects');
+  }
 });
 app.get('/categories', async (req, res) => {
+  try {
+    const categories = await getAllCategories();
     const title = 'Service Project Categories';
-    res.render('categories', { title });
+    res.render('categories', { title, categories });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error retrieving categories');
+  }
 });
+
 app.listen(PORT, async () => {
   try {
     await testConnection();
