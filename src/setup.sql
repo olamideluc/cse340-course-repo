@@ -46,7 +46,18 @@ VALUES
 (1, 'Tree Planting', 'Planting 200 trees', 'Cotonou', '2026-08-15'),
 (2, 'Food Drive', 'Collecting food for families', 'Sakété', '2026-09-01'),
 (2, 'Health Fair', 'Free medical check-ups', 'Abomey', '2026-09-10'),
-(3, 'Literacy Workshop', 'Teaching reading skills', 'Parakou', '2026-10-05');
+(3, 'Literacy Workshop', 'Teaching reading skills', 'Parakou', '2026-10-05'),
+(1, 'Bridge Repair', 'Fixing damaged community bridges', 'Porto-Novo', '2026-11-01'),
+(1, 'Playground Construction', 'Building safe play areas for children', 'Cotonou', '2026-11-15'),
+(1, 'Community Center Upgrade', 'Renovating local community centers', 'Ouidah', '2026-12-01'),
+(2, 'Community Garden', 'Creating shared garden plots for families', 'Sakété', '2026-12-10'),
+(2, 'Composting Workshop', 'Teaching sustainable waste management', 'Abomey', '2026-12-20'),
+(2, 'Farmers Market Expansion', 'Supporting local farmers with new stalls', 'Lokossa', '2027-01-05'),
+(3, 'Clothing Drive', 'Collecting clothes for families in need', 'Parakou', '2027-01-12'),
+(3, 'Senior Care Visits', 'Providing companionship and support to elders', 'Natitingou', '2027-01-20'),
+(3, 'Disaster Relief Training', 'Training volunteers for emergency response', 'Kandi', '2027-02-01'),
+(3, 'Youth Leadership Camp', 'Developing leadership skills in young volunteers', 'Allada', '2027-02-10');
+
 
 
 
@@ -72,8 +83,19 @@ INSERT INTO categories (name) VALUES
 
 -- Associate projects with categories
 INSERT INTO project_categories (project_id, category_id) VALUES
-(1, 1), -- Community Clean-Up → Environmental
-(2, 1), -- Tree Planting → Environmental
-(3, 2), -- Food Drive → Health
-(4, 2), -- Health Fair → Health
-(5, 3); -- Literacy Workshop → Education
+(1, 1),  -- Community Clean-Up → Environmental
+(2, 1),  -- Tree Planting → Environmental
+(3, 2),  -- Food Drive → Health
+(4, 2),  -- Health Fair → Health
+(5, 3),  -- Literacy Workshop → Education
+(6, 1),  -- Bridge Repair → Environmental
+(7, 1),  -- Playground Construction → Environmental
+(8, 3),  -- Community Center Upgrade → Education
+(9, 1),  -- Community Garden → Environmental
+(10, 1), -- Composting Workshop → Environmental
+(11, 1), -- Farmers Market Expansion → Environmental
+(12, 2), -- Clothing Drive → Health
+(13, 2), -- Senior Care Visits → Health
+(14, 2), -- Disaster Relief Training → Health
+(15, 3); -- Youth Leadership Camp → Education
+
