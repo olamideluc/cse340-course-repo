@@ -1,3 +1,6 @@
+-- =========================
+-- Organizations Table
+-- =========================
 CREATE TABLE organizations (
     organization_id SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
@@ -6,42 +9,31 @@ CREATE TABLE organizations (
     logo_filename VARCHAR(255) NOT NULL
 );
 
-INSERT INTO organizations (name, description, contact_email, logo_filename)
-VALUES 
-('BrightFuture Builders', 
- 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 
- 'info@brightfuturebuilders.org', 
- 'brightfuture-logo.png');
-
-INSERT INTO organizations (name, description, contact_email, logo_filename)
-VALUES 
-('GreenHarvest Growers', 
- 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 
- 'contact@greenharvest.org', 
- 'greenharvest-logo.png');
-
-INSERT INTO organizations (name, description, contact_email, logo_filename)
-VALUES 
-('UnityServe Volunteers', 
- 'A volunteer coordination group supporting local charities and service initiatives.', 
- 'hello@unityserve.org', 
- 'unityserve-logo.png');
+-- Insert 3 organizations
+INSERT INTO organizations (name, description, contact_email, logo_filename) VALUES
+('BrightFuture Builders', 'A nonprofit focused on improving community infrastructure through sustainable construction projects.', 'info@brightfuturebuilders.org', 'brightfuture-logo.png'),
+('GreenHarvest Growers', 'An urban farming collective promoting food sustainability and education in local neighborhoods.', 'contact@greenharvest.org', 'greenharvest-logo.png'),
+('UnityServe Volunteers', 'A volunteer coordination group supporting local charities and service initiatives.', 'hello@unityserve.org', 'unityserve-logo.png');
 
 
 
-
+-- =========================
+-- Projects Table
+-- =========================
 CREATE TABLE projects (
-  project_id SERIAL PRIMARY KEY,
-  organization_id INT NOT NULL REFERENCES organizations(organization_id),
-  title VARCHAR(255) NOT NULL,
-  description TEXT,
-  location VARCHAR(255),
-  date DATE NOT NULL
+    project_id SERIAL PRIMARY KEY,
+    organization_id INT NOT NULL,
+    title VARCHAR(255) NOT NULL,
+    description TEXT NOT NULL,
+    location VARCHAR(255) NOT NULL,
+    date DATE NOT NULL,
+    CONSTRAINT fk_projects_org FOREIGN KEY (organization_id)
+        REFERENCES organizations(organization_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- Insert sample projects (5 per organization)
-INSERT INTO projects (organization_id, title, description, location, date)
-VALUES
+-- Insert 15 projects (5 per organization)
+INSERT INTO projects (organization_id, title, description, location, date) VALUES
 (1, 'Community Clean-Up', 'Cleaning public spaces', 'Porto-Novo', '2026-08-01'),
 (1, 'Tree Planting', 'Planting 200 trees', 'Cotonou', '2026-08-15'),
 (2, 'Food Drive', 'Collecting food for families', 'Sakété', '2026-09-01'),
@@ -60,28 +52,38 @@ VALUES
 
 
 
-
-
--- Categories table
+-- =========================
+-- Categories Table
+-- =========================
 CREATE TABLE categories (
-  category_id SERIAL PRIMARY KEY,
-  name VARCHAR(255) UNIQUE NOT NULL
+    category_id SERIAL PRIMARY KEY,
+    name VARCHAR(255) UNIQUE NOT NULL
 );
 
--- Join table for many-to-many relationship
-CREATE TABLE project_categories (
-  project_id INT NOT NULL REFERENCES projects(project_id),
-  category_id INT NOT NULL REFERENCES categories(category_id),
-  PRIMARY KEY (project_id, category_id)
-);
-
--- Insert sample categories
+-- Insert 3 categories
 INSERT INTO categories (name) VALUES
 ('Environmental'),
 ('Health'),
 ('Education');
 
--- Associate projects with categories
+
+
+-- =========================
+-- Project-Categories Join Table
+-- =========================
+CREATE TABLE project_categories (
+    project_id INT NOT NULL,
+    category_id INT NOT NULL,
+    CONSTRAINT pk_project_categories PRIMARY KEY (project_id, category_id),
+    CONSTRAINT fk_pc_project FOREIGN KEY (project_id)
+        REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_pc_category FOREIGN KEY (category_id)
+        REFERENCES categories(category_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+-- Associate all 15 projects with categories
 INSERT INTO project_categories (project_id, category_id) VALUES
 (1, 1),  -- Community Clean-Up → Environmental
 (2, 1),  -- Tree Planting → Environmental
@@ -98,4 +100,3 @@ INSERT INTO project_categories (project_id, category_id) VALUES
 (13, 2), -- Senior Care Visits → Health
 (14, 2), -- Disaster Relief Training → Health
 (15, 3); -- Youth Leadership Camp → Education
-
