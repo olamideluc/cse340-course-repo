@@ -1,0 +1,26 @@
+<!-- src/views/category.ejs -->
+
+<%- include('partials/header', { title: title }) %>
+
+<main>
+  <h1><%= category.name %></h1>
+
+  <% if (projects.length > 0) { %>
+    <ul>
+      <% projects.forEach(project => { %>
+        <li>
+          <a href="/project/<%= project.project_id %>">
+            <%= project.title %>
+          </a>
+          — <a href="/organization/<%= project.organization_id %>">
+            <%= project.organization_name %>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No service projects found for this category.</p>
+  <% } %>
+</main>
+
+<%- include('partials/footer') %>
