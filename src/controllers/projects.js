@@ -110,7 +110,7 @@ const showEditProjectForm = async (req, res) => {
     const organizations = await getAllOrganizations();
 
     const title = 'Edit Service Project';
-    res.render('update-project', { title, project, organizations });
+    res.render('edit-project', { title, project, organizations });
   } catch (error) {
     console.error('Error loading edit form:', error);
     res.status(500).send('Error loading edit form');
