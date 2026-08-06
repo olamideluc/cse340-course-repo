@@ -9,8 +9,13 @@
         <a href="/category/<%= category.category_id %>">
           <%= category.name %>
         </a>
+        <!-- Edit link for each category -->
+        <a href="/edit-category/<%= category.category_id %>">Edit</a>
       </li>
     <% }); %>
   </ul>
+
+  <!-- Add new category link -->
+  <a href="/new-category">Add New Category</a>
 </main>
 <%- include('partials/footer') %>
